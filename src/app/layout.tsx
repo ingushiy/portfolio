@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   title: "WebDev Studio — Создание сайтов и Telegram ботов",
   description:
     "Разработка современных веб-страниц и Telegram ботов под ключ. Быстро, качественно, недорого.",
+  verification: {
+    google: "zwFCdpmmB03k4unraJRZSBpOhd6lPLs23Pbqlp08iOI",
+  },
+  other: {
+    "geo.region": "RU-IN",
+    "geo.placename": "Ингушетия, Россия",
+    "geo.position": "43.1663;44.8285",
+    "ICBM": "43.1663, 44.8285",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +45,6 @@ export default function RootLayout({
         <footer className="bg-zinc-900 border-t border-zinc-800 py-6 text-center text-sm text-zinc-500">
           <p>&copy; {new Date().getFullYear()} WebDev Studio. Все права защищены.</p>
         </footer>
-        {/* Плавающая кнопка WhatsApp — на всех страницах */}
         <WhatsAppButton />
       </body>
     </html>
