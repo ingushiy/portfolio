@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  cursor: none; /* кастомный курсор */
+}
+
+/* ── Кастомный курсор ──────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(59,130,246,0.6);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, top 0.3s ease, left 0.3s ease;
+}
+
+.cursor-ring.cursor-grow {
+  top: -28px;
+  left: -28px;
+  width: 56px;
+  height: 56px;
+  border-color: rgba(59,130,246,0.9);
+  background: rgba(59,130,246,0.06);
+}
+
+/* ── Сканлайны (поверх hero) ───────────────────────── */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,0.08) 3px,
+    rgba(0,0,0,0.08) 4px
+  );
+}
+
+/* ── Hero анимации ─────────────────────────────────── */
+@keyframes slide-up {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up-1 {
+  animation: slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+}
+.animate-slide-up-2 {
+  animation: slide-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.38s both;
+}
+.animate-badge {
+  animation: fade-in 0.7s ease 0.1s both;
+}
+.animate-fade-in-delayed {
+  animation: fade-in 0.7s ease 0.65s both;
+}
+.animate-fade-in-delayed2 {
+  animation: fade-in 0.7s ease 0.85s both;
+}
+
+/* ── Scroll bounce hint ────────────────────────────── */
+@keyframes bounce-slow {
+  0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.3; }
+  50%      { transform: translateX(-50%) translateY(8px); opacity: 0.6; }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2.4s ease-in-out infinite;
+}
+
+/* ── Scroll reveal ─────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16,1,0.3,1),
+    transform 0.75s cubic-bezier(0.16,1,0.3,1);
+}
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Magnetic кнопки ───────────────────────────────── */
+.magnetic-btn {
+  transition: transform 0.5s cubic-bezier(0.23,1,0.32,1);
+}
+
+/* ── Reduced motion ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ── Кастомный курсор ──────────────────────────────── */
+body { cursor: none; }
+#cur-dot {
+  position: fixed; top: -4px; left: -4px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #3b82f6; pointer-events: none;
+  z-index: 9999; will-change: transform;
+}
+#cur-ring {
+  position: fixed; top: -20px; left: -20px;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid rgba(59,130,246,.5);
+  pointer-events: none; z-index: 9998;
+  will-change: transform;
+  transition: width .3s, height .3s, top .3s, left .3s, border-color .3s, background .3s;
+}
+#cur-ring.big {
+  top: -30px; left: -30px;
+  width: 60px; height: 60px;
+  border-color: rgba(59,130,246,.8);
+  background: rgba(59,130,246,.04);
+}
+
+/* ── Particle canvas ───────────────────────────────── */
+canvas { display: block; }
+
+/* ── 3D Tilt ───────────────────────────────────────── */
+.tilt-card { transform-style: preserve-3d; }
+.tilt-card .absolute {
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(59,130,246,.07) 0%, transparent 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { cursor: auto; }
+  #cur-dot, #cur-ring { display: none; }
+}
+
+/* ── WhatsApp pulse ────────────────────────────────── */
+@keyframes wa-pulse {
+  0%   { transform: scale(1);   opacity: 0.4; }
+  70%  { transform: scale(1.7); opacity: 0;   }
+  100% { transform: scale(1.7); opacity: 0;   }
+}
+.animate-wa-pulse {
+  animation: wa-pulse 1.8s ease-out infinite;
+}
+
+/* ── Messenger Modal ───────────────────────────────── */
+@keyframes modal-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-modal-up {
+  animation: modal-up 0.35s cubic-bezier(0.16,1,0.3,1) both;
+}
