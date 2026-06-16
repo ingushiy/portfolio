@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://portfolio-three-phi-l1nqlenhzc.vercel.app/sitemap.xml",
+    sitemap: "https://webdevst-ing.site/sitemap.xml",
   };
 }
